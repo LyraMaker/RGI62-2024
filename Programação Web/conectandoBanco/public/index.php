@@ -9,7 +9,13 @@ include __DIR__."/../app/Model/Aluno.php";
 $consulta = $banco->query("SELECT * FROM ALUNO");
 
 $alunos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-
+$contador = 0;
 foreach ($alunos as $aluno) {
-    echo $aluno["matricula"]."|<strong>".$aluno['nome']."</strong><br>";
+
+    $objAluno[] = new Aluno();
+    $objAluno[$contador]->setMatricula($aluno["matricula"]);
+    $objAluno[$contador]->setNome($aluno["nome"]);
+
+    echo $objAluno[$contador]->getNome()."<br>";
 }
+
