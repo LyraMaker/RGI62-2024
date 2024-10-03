@@ -1,6 +1,6 @@
 <?php
 
-class AlunoPerfeito{
+class Aluno{
     private $matricula;
     private $nome;
     private $nota1;
