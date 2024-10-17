@@ -1,23 +1,26 @@
 <?php
+use UserBanco;
 
-class ValidarUsuario{
-    private $pdo;
-
-    public function __construct()
+class ValidarUsuario
+{
+    public function retornar()
     {
-        require __DIR__."/../Database/Conectar.php";
-        $this->pdo = $banco;
-    }
 
-    public function verificarSeExiste($usuario,$senha){
-        $sql = "SELECT * FROM usuario WHERE username = :u AND senha = :s and perfil_ativo = true";
-        $comando = $this->pdo->prepare($sql);
+        if ($_POST['usuario'] == "") {
+            die("Usuário não digitado!");
+        }
 
-        $comando->bindValue("u",$usuario);
-        $comando->bindValue("s",$senha);
+        if ($_POST['senha'] == "") {
+            die("Senha não digitada!");
+        }
 
-        $comando->execute();
+        $existeAluno = (new UserBanco())->verificarSeExiste($_POST['usuario'], $_POST['senha']);
 
-        return $comando->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($existeAluno)) {
+            die("Não existe este usuário!");
+        }
+
+        echo "Esse usuário existe!";
     }
 }

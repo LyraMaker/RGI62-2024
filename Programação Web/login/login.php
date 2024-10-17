@@ -6,7 +6,7 @@
                 <div class="column is-half">
                     <div class="box">
                         <h1 class="title has-text-centered">Login</h1>
-                        <form action="index.php" method="post">
+                        <form action="./index.php?acao=login" method="post">
                             <div class="field">
                                 <label class="label">Usuário</label>
                                 <div class="control">

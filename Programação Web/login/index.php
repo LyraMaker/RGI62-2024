@@ -1,23 +1,22 @@
 <?php
 
 require __DIR__ . "/app/Controller/ValidarUsuario.php";
+require __DIR__ . "/app/Controller/CadastrarUsuario.php";
+require __DIR__."/app/Model/UserBanco.php";
+
+require __DIR__."/header.php";
+
 
 if (!isset($_POST['usuario']) && !isset($_POST['senha'])) {
     header("Location: ./login.php");
 }
 
-$existeAluno = (new ValidarUsuario())->verificarSeExiste($_POST['usuario'], $_POST['senha']);
-
-if ($_POST['usuario'] == "") {
-    die("Usuário não digitado!");
+if (isset($_GET['acao'])) {
+    if ($_GET['acao'] == 'login') {
+        (new ValidarUsuario)->retornar();
+    }
+    if ($_GET['acao'] == 'cadastrar') {
+       echo (new CadastrarUsuario)->retornar();
+    }
+    require __DIR__."/menu.php"; 
 }
-
-if ($_POST['senha'] == "") {
-    die("Senha não digitada!");
-}
-
-if (empty($existeAluno)) {
-    die("Não existe este usuário!");
-}
-
-echo "Esse usuário existe!";
