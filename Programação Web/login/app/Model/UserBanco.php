@@ -1,5 +1,7 @@
 <?php
+require __DIR__."/User.php";
 
+use User;
 class UserBanco{
     private $pdo;
 
@@ -33,4 +35,25 @@ class UserBanco{
         return $comando->execute();
     }
 
+    public function listarTodos(){
+        $sql = "SELECT * FROM usuarios";
+        $comando = $this->pdo->prepare($sql);
+
+        $comando->execute();
+
+        return $this->hidratar($comando->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    public function hidratar($array){
+        $todosUsuarios = [];
+        foreach($array as $usuario){
+            $valor = new User();
+            $valor->setUsername($usuario['username']);
+            $valor->setSenha($usuario['senha']);
+            $valor->setAtiva($usuario['ativo']);
+
+            $todosUsuarios[]=$valor;
+        }
+        return $todosUsuarios;
+    }
 }
