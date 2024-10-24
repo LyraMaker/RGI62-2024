@@ -21,8 +21,8 @@
                             <td><?= $usuario->getSenha(); ?></td>
                             <td><?= $usuario->getAtiva() == 0 ? "⛔" : "✅"?></td>
                             <td>
-                                <a class="button is-small is-info">Editar</a>
-                                <a class="button is-small is-danger">Excluir</a>
+                                <a class="button is-small is-info" href="/index.php?acao=editar&username=<?=$usuario->getUsername()?>">Editar</a>
+                                <a class="button is-small is-danger" href="/index.php?acao=excluir&username=<?=$usuario->getUsername()?>">Excluir</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
